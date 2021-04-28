@@ -1,22 +1,22 @@
 package com.localSearch.modal;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
-public class User {
+public class UserModel {
 	
 	private Long id;
+	private String password;
 	private String firstName;
 	private String middleName;
 	private String lastName;
 	private String mobile;
 	private String email;
-	private String password;
-	private boolean isAdmin;
-	private boolean isVendor;
 	private LocalDateTime registeredAt;
 	private LocalDateTime lastLogin;
-	private String intro;
-	private String profile;
+//	private String intro;
+//	private String profile;
+	private Set<Role> roles;
 	
 	public Long getId() {
 		return id;
@@ -60,18 +60,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-	public boolean isVendor() {
-		return isVendor;
-	}
-	public void setVendor(boolean isVendor) {
-		this.isVendor = isVendor;
-	}
 	public LocalDateTime getRegisteredAt() {
 		return registeredAt;
 	}
@@ -84,24 +72,17 @@ public class User {
 	public void setLastLogin(LocalDateTime lastLogin) {
 		this.lastLogin = lastLogin;
 	}
-	public String getIntro() {
-		return intro;
+	public Set<Role> getRoles() {
+		return roles;
 	}
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
-	public String getProfile() {
-		return profile;
-	}
-	public void setProfile(String profile) {
-		this.profile = profile;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName
-				+ ", mobile=" + mobile + ", email=" + email + ", password=" + password + ", isAdmin=" + isAdmin
-				+ ", isVendor=" + isVendor + ", registeredAt=" + registeredAt + ", lastLogin=" + lastLogin + ", intro="
-				+ intro + ", profile=" + profile + "]";
+		return "UserModel [id=" + id + ", password=" + password + ", firstName=" + firstName + ", middleName="
+				+ middleName + ", lastName=" + lastName + ", mobile=" + mobile + ", email=" + email + ", registeredAt="
+				+ registeredAt + ", lastLogin=" + lastLogin + ", roles=" + roles + "]";
 	}
 }
