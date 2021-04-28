@@ -16,9 +16,9 @@ public class UserData implements UserDetails {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private UserModel user;
+	private User user;
 
-	public UserData(UserModel user) {
+	public UserData(User user) {
 		this.user = user;
 	}
 
@@ -49,25 +49,25 @@ public class UserData implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

@@ -1,23 +1,50 @@
 package com.localSearch.modal;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
-public class UserModel {
-	
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+@Entity
+@Table(name = "users")
+public class User {
+
+	@Id
+	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String password;
 	private String firstName;
 	private String middleName;
 	private String lastName;
 	private String mobile;
+	@Column(name = "username")
 	private String email;
 	private LocalDateTime registeredAt;
 	private LocalDateTime lastLogin;
-//	private String intro;
-//	private String profile;
-	private Set<Role> roles;
-	
+	//	private String intro;
+	//	private String profile;
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "users_roles",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")
+			)
+	private Set<Role> roles =  new HashSet<>();
+
 	public Long getId() {
 		return id;
 	}
@@ -78,10 +105,10 @@ public class UserModel {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "UserModel [id=" + id + ", password=" + password + ", firstName=" + firstName + ", middleName="
+		return "User [id=" + id + ", password=" + password + ", firstName=" + firstName + ", middleName="
 				+ middleName + ", lastName=" + lastName + ", mobile=" + mobile + ", email=" + email + ", registeredAt="
 				+ registeredAt + ", lastLogin=" + lastLogin + ", roles=" + roles + "]";
 	}

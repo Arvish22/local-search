@@ -1,5 +1,7 @@
 package com.localSearch.controller;
 
+import java.io.Console;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,11 +35,15 @@ public class JwtAuthenticationController {
 
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+		
+		System.err.println(authenticationRequest.getUsername()+"----"+authenticationRequest.getPassword());
 
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
 		final UserDetails userDetails = userDetailsService
 				.loadUserByUsername(authenticationRequest.getUsername());
+		
+		System.err.println(userDetails);
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
